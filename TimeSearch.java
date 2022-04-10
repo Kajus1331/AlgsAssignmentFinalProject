@@ -1,31 +1,29 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Time;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TimeSearch{
 
     public ArrayList<String> stoptData = new ArrayList<>();
 
+    // takes in the file and stores the relevant data
     TimeSearch(String filename) throws FileNotFoundException{
         File file = new File(filename);
 	
         if (filename != null) {
-            Scanner newLine = new Scanner(file);
-            newLine.nextLine();
+            try (Scanner newLine = new Scanner(file)) {
+                newLine.nextLine();
 
-            while (newLine.hasNextLine()) {
-                String dataLine = newLine.nextLine();
-                stoptData.add(dataLine);
+                while (newLine.hasNextLine()) {
+                    String dataLine = newLine.nextLine();
+                    stoptData.add(dataLine);
+                }
             }
         } 
     }
 
+    // returns all of the stops with the the same time as the input
     public ArrayList<String> Search(String userTime){
         ArrayList<String> results = new ArrayList<>();
         for (int i = 0; i < stoptData.size(); i++){
@@ -37,12 +35,6 @@ public class TimeSearch{
                 results.add(toString);
             }
         }
-        System.out.println("HELLO");
         return results;
     }
-
-    
-
-
-    
 }
