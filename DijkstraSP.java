@@ -10,11 +10,20 @@ public class DijkstraSP {
 
     Digraph diGraph;
 
+    /**
+     * Computes a shortest-paths tree from the source vertex to the ending vertex in 
+     * the Digraph
+     * 
+     * @param graph the Digraph
+     * @param S the starting node
+     * @param E the ending node
+     */
     DijkstraSP(Digraph graph, int S, int E){
         startNode = S;
         endNode = E;
         diGraph = graph;
 
+        // set list to default 
         for (int i=0;i<diGraph.nodes.length;i++){
             distTo.add(9999999.0);
             edgeTo.add(null);
@@ -22,6 +31,7 @@ public class DijkstraSP {
         } 
 
         distTo.set(startNode, 0.0);
+
 
         for (int i=0;i<diGraph.nodes.length;i++){
             double defaultDist = 9999999.0;
@@ -40,6 +50,7 @@ public class DijkstraSP {
         endingNodeIndex = diGraph.getNodeIndex(endNode);
     }
 
+    // relax the vertex
     private void relax(int vertex, Digraph graph){
         for (int i = 0; i < graph.nodes[vertex].nodeEdges.size();i++){    		
             Edge edge = graph.nodes[vertex].nodeEdges.get(i);
@@ -52,6 +63,7 @@ public class DijkstraSP {
         }
     }
 
+    // returns the path that is the shortes between the two nodes
     public ArrayList<Edge> getPath(){
         ArrayList<Edge> pathEdges = new ArrayList<Edge>();
 
